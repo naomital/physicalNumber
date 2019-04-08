@@ -34,7 +34,7 @@ int main() {
     cout << a << endl;   // Prints "1700[kg]" since a has changed.
 
     try {
-      cout << (a+b) << endl;  
+      cout << (a+b) << endl;
     } catch (const std::exception& ex) {
       cout << ex.what() << endl; // Prints "Units do not match - [m] cannot be converted to [kg]"
     }

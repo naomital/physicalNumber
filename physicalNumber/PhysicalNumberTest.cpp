@@ -107,6 +107,73 @@ int main() {
      .CHECK_OUTPUT(hour, "3[hour]")
     PhysicalNumber minits(60, Unit::MIN);
      .CHECK_OUTPUT(minits, "60[min]")
+     .CHECK_OUTPUT(hour-minits, "120[min]")
+     .CHECK_OUTPUT(minits - hour, "-120[min]")
+     .CHECK_OUTPUT(minits-secon, "3595[sec]")
+    .CHECK_OUTPUT(secon - minits, "-3595[sec]")
+    .CHECK_OUTPUT(hour-secon, "10795[sec]")
+    .CHECK_OUTPUT(secon = (hour-secon), "10795[sec]")
+    .CHECK_OUTPUT(secon, "10795[sec]")
+  int random[5] = {rand()%100,rand()%100,rand()%100,rand()%100,rand()%100};
+        PhysicalNumber secon0(random[0], Unit::SEC);
+        PhysicalNumber secon1(random[1], Unit::SEC);
+        PhysicalNumber secon2(random[2], Unit::SEC);
+        PhysicalNumber secon3(random[3], Unit::SEC);
+        PhysicalNumber secon4(random[4], Unit::SEC);
+         .CHECK_OUTPUT(secon0-secon1, (random[0] - random[1]) +"[sec]")
+         .CHECK_OUTPUT(secon1-secon2, (random[1] -random[2]) +"[sec]")
+         .CHECK_OUTPUT(secon2-secon3, (random[2] - random[3]) +"[sec]")
+         .CHECK_OUTPUT(secon3-secon4, (random[3] - random[4]) +"[sec]")
+         .CHECK_OUTPUT(secon0-secon2, (random[0] - random[2]) +"[sec]")
+         .CHECK_OUTPUT(secon0-secon3, (random[0] - random[3]) +"[sec]")
+         .CHECK_OUTPUT(secon0-secon4, (random[0] - random[4]) +"[sec]")
+        .CHECK_OUTPUT(secon1-secon3, (random[1] - random[3]) +"[sec]")
+         .CHECK_OUTPUT(secon0+secon1, (random[0] + random[1]) +"[sec]")
+         .CHECK_OUTPUT(secon1+secon2, (random[1] +random[2]) +"[sec]")
+         .CHECK_OUTPUT(secon2+secon3, (random[2] + random[3]) +"[sec]")
+         .CHECK_OUTPUT(secon3+secon4, (random[3] + random[4]) +"[sec]")
+         .CHECK_OUTPUT(secon0+secon2, (random[0] + random[2]) +"[sec]")
+         .CHECK_OUTPUT(secon0+secon3, (random[0] + random[3]) +"[sec]")
+         .CHECK_OUTPUT(secon0+secon4, (random[0] + random[4]) +"[sec]")
+        .CHECK_OUTPUT(secon1+secon3, (random[1] + random[3]) +"[sec]")
+        PhysicalNumber min0(random[0], Unit::MIN);
+        PhysicalNumber min1(random[1], Unit::MIN);
+        PhysicalNumber min2(random[2], Unit::MIN);
+        PhysicalNumber min3(random[3], Unit::MIN);
+        PhysicalNumber min4(random[4], Unit::MIN);
+         .CHECK_OUTPUT(min0-min1, (random[0] - random[1]) +"[min]")
+         .CHECK_OUTPUT(min1-min2, (random[1] -random[2]) +"[min]")
+         .CHECK_OUTPUT(min2-min3, (random[2] - random[3]) +"[min]")
+         .CHECK_OUTPUT(min3-min4, (random[3] - random[4]) +"[min]")
+         .CHECK_OUTPUT(min0-min2, (random[0] - random[2]) +"[min]")
+         .CHECK_OUTPUT(min0-min3, (random[0] - random[3]) +"[min]")
+         .CHECK_OUTPUT(min0-min4, (random[0] - random[4]) +"[min]")
+        .CHECK_OUTPUT(min1-min3, (random[1] - random[3]) +"[smin]")
+         .CHECK_OUTPUT(min0+min1, (random[0] + random[1]) +"[min]")
+         .CHECK_OUTPUT(min1+min2, (random[1] +random[2]) +"[min]")
+         .CHECK_OUTPUT(min2+min3, (random[2] + random[3]) +"[min]")
+         .CHECK_OUTPUT(min3+min4, (random[3] + random[4]) +"[min]")
+         .CHECK_OUTPUT(min0+min2, (random[0] + random[2]) +"[min]")
+         .CHECK_OUTPUT(min0+min3, (random[0] + random[3]) +"[min]")
+         .CHECK_OUTPUT(min0+min4, (random[0] + random[4]) +"[min]")
+        .CHECK_OUTPUT(min1+min3, (random[1] + random[3]) +"[min]")
+        .CHECK_OUTPUT(secon1+min1, (random[1] + (random[1]*60)) +"[sec]")
+        .CHECK_OUTPUT(secon0+min1, (random[0] + (random[1]*60)) +"[sec]")
+        .CHECK_OUTPUT(secon2+min1, (random[2] + (random[1]*60)) +"[sec]")
+        .CHECK_OUTPUT(secon3+min1, (random[3] + (random[1]*60)) +"[sec]")
+        .CHECK_OUTPUT(secon1+min2, (random[1] + (random[2]*60)) +"[sec]")
+
+
+
+         
+
+
+
+
+
+
+  
+
 
 
 

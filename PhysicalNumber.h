@@ -4,11 +4,15 @@ using namespace std;
 namespace ariel {
 class PhysicalNumber {
 private:
-int U;
+Unit U;
 double x;
+
+//convert
+void someType(PhysicalNumber& n);
+void casting()
 public:
 //constractors
-PhysicalNumber(double x,int U);
+PhysicalNumber(double x,Unit U);
 // onary
 const PhysicalNumber operator+() const;
 const PhysicalNumber operator-() const;
@@ -27,17 +31,16 @@ friend ostream& operator<<(ostream &os, const PhysicalNumber& n);
 friend istream& operator>>(istream &is, PhysicalNumber& n);
 // < , > <= , >=
 
-friend const bool operator==(const PhysicalNumber n1, const PhysicalNumber n2) {
-        return n1.x == n2.x;};
-friend const bool operator<(const PhysicalNumber n1, const PhysicalNumber n2) {
-        return n1.x < n2.x;};
-friend const bool operator>(const PhysicalNumber n1, const PhysicalNumber n2) {
-        return n1.x > n2.x;};
-friend const bool operator<=(const PhysicalNumber n1, const PhysicalNumber n2) {
-        return n1.x <= n2.x;};
-friend const bool operator>=(const PhysicalNumber n1, const PhysicalNumber n2) {
-        return n1.x >= n2.x;};
-friend const bool operator!=(const PhysicalNumber n1, const PhysicalNumber n2) {
-        return !(n1.x==n2.x);};
+ const bool operator==(const PhysicalNumber& n);
+ const bool operator<(const PhysicalNumber& n) ;
+ const bool operator>(const PhysicalNumber& n) ;
+ const bool operator<=(const PhysicalNumber& n) ;
+ const bool operator>=(const PhysicalNumber& n) ;
+ const bool operator!=(const PhysicalNumber& n) ;
+
+
+
 };
+ostream& operator<<(ostream &os, const PhysicalNumber& n);
+istream& operator>>(istream &is, PhysicalNumber& n);
 }

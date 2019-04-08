@@ -74,7 +74,7 @@ int main() {
     .setname("Basic input")
     .CHECK_OK(istringstream("700[kg]") >> a)
     .CHECK_OUTPUT((a += PhysicalNumber(1, Unit::TON)), "1700[kg]")
-
+int random[5] = {rand()%100,rand()%100,rand()%100,rand()%100,rand()%100};
     //case 1 whigh
     .CHECK_OUTPUT(g+kg, "100100[g]")
     .CHECK_OUTPUT((kg+=t), "100100[kg]")
@@ -82,6 +82,48 @@ int main() {
     .CHECK_OUTPUT(kg+kg, "200200[kg]")
     .CHECK_OUTPUT(kg-kg, "0[kg]")
     .CHECK_OUTPUT((t+=g), "100.0001[ton]")
+        PhysicalNumber kg0(random[0], Unit::KG);
+        PhysicalNumber kg1(random[1], Unit::KG);
+        PhysicalNumber kg2(random[2], Unit::KG);
+        PhysicalNumber kg3(random[3], Unit::KG);
+        PhysicalNumber kg4(random[4], Unit::KG);
+         .CHECK_OUTPUT(kg0-kg1, (random[0] - random[1]) +"[kg]")
+         .CHECK_OUTPUT(kg1-kg2, (random[1] -random[2]) +"[kg]")
+         .CHECK_OUTPUT(kg2-kg3, (random[2] - random[3]) +"[kg]")
+         .CHECK_OUTPUT(kg3-kg4, (random[3] - random[4]) +"[kg]")
+         .CHECK_OUTPUT(kg0-kg2, (random[0] - random[2]) +"[kg]")
+         .CHECK_OUTPUT(kg0-kg3, (random[0] - random[3]) +"[kg]")
+         .CHECK_OUTPUT(kg0-kg4, (random[0] - random[4]) +"[kg]")
+        .CHECK_OUTPUT(kg1-kg3, (random[1] - random[3]) +"[kg]")
+         .CHECK_OUTPUT(kg0+kg1, (random[0] + random[1]) +"[kg]")
+         .CHECK_OUTPUT(kg1+kg2, (random[1] +random[2]) +"[kg]")
+         .CHECK_OUTPUT(kg2+kg3, (random[2] + random[3]) +"[kg]")
+         .CHECK_OUTPUT(kg3+kg4, (random[3] + random[4]) +"[kg]")
+         .CHECK_OUTPUT(kg0+kg2, (random[0] + random[2]) +"[kg]")
+         .CHECK_OUTPUT(kg0+kg3, (random[0] + random[3]) +"[kg]")
+         .CHECK_OUTPUT(kg0+kg4, (random[0] + random[4]) +"[kg]")
+        .CHECK_OUTPUT(kg1+kg3, (random[1] + random[3]) +"[kg]")
+        PhysicalNumber ton0(random[0], Unit::TON);
+        PhysicalNumber ton1(random[1], Unit::TON);
+        PhysicalNumber ton2(random[2], Unit::TON);
+        PhysicalNumber ton3(random[3], Unit::TON);
+        PhysicalNumber ton4(random[4], Unit::TON);
+         .CHECK_OUTPUT(ton0-ton1, (random[0] - random[1]) +"[ton]")
+         .CHECK_OUTPUT(ton1-ton2, (random[1] -random[2]) +"[ton]")
+         .CHECK_OUTPUT(ton2-ton3, (random[2] - random[3]) +"[ton]")
+         .CHECK_OUTPUT(ton3-ton4, (random[3] - random[4]) +"[ton]")
+         .CHECK_OUTPUT(ton0-ton2, (random[0] - random[2]) +"[ton]")
+         .CHECK_OUTPUT(ton0-ton3, (random[0] - random[3]) +"[ton]")
+         .CHECK_OUTPUT(ton0-ton4, (random[0] - random[4]) +"[ton]")
+        .CHECK_OUTPUT(ton1-ton3, (random[1] - random[3]) +"[ton]")
+         .CHECK_OUTPUT(ton0+ton1, (random[0] + random[1]) +"[ton]")
+         .CHECK_OUTPUT(ton1+ton2, (random[1] +random[2]) +"[ton]")
+         .CHECK_OUTPUT(ton2+ton3, (random[2] + random[3]) +"[ton]")
+         .CHECK_OUTPUT(ton3+ton4, (random[3] + random[4]) +"[ton]")
+         .CHECK_OUTPUT(ton0+ton2, (random[0] + random[2]) +"[ton]")
+         .CHECK_OUTPUT(ton0+ton3, (random[0] + random[3]) +"[ton]")
+         .CHECK_OUTPUT(ton0+ton4, (random[0] + random[4]) +"[ton]")
+        .CHECK_OUTPUT(ton1+ton3, (random[1] + random[3]) +"[ton]")
     //time 
     .CHECK_OUTPUT((h+=d), "300.5[hour]")
     .CHECK_OUTPUT(h, "300.5[hour]")
@@ -114,7 +156,7 @@ int main() {
     .CHECK_OUTPUT(hour-secon, "10795[sec]")
     .CHECK_OUTPUT(secon = (hour-secon), "10795[sec]")
     .CHECK_OUTPUT(secon, "10795[sec]")
-  int random[5] = {rand()%100,rand()%100,rand()%100,rand()%100,rand()%100};
+  
         PhysicalNumber secon0(random[0], Unit::SEC);
         PhysicalNumber secon1(random[1], Unit::SEC);
         PhysicalNumber secon2(random[2], Unit::SEC);

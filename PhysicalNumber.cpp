@@ -45,3 +45,9 @@ using namespace ariel;
   istream& ariel::operator>>(istream &is, PhysicalNumber& n){
     return is;
   }
+void PhysicalNumber::someType(PhysicalNumber& n){
+        if(((int)n.U >= 0 && (int)n.U <=2) && ((int)this->U>=0&&(int)this->U<=2)) {}
+        else if (((int)n.U >= 3 && (int)n.U <=5) && ((int)this->U>=3&&(int)this->U<=5)) {}
+        else if (((int)n.U >= 6 && (int)n.U <=8) && ((int)this->U>=6&&(int)this->U<=8)) {}
+        else{__throw_invalid_argument("test");}
+}

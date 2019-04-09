@@ -3,7 +3,7 @@
 
 using namespace std;
 using namespace ariel;
-//100 km +100 m 100*100 = 10000/1000
+//2 km + 300 m 300*100 = 30000/100000
 const long value[9]={1, 100, 100000, 1, 60, 3600, 1, 1000, 1000000};
 const string name[9]={"cm", "m", "km", "sec", "min", "hour", "g", "kg", "ton"};
 PhysicalNumber::PhysicalNumber(double x1,Unit U1){
@@ -17,11 +17,11 @@ bool PhysicalNumber::someType(const PhysicalNumber& n){
         else{return false;}
 }
 const PhysicalNumber PhysicalNumber::operator+() {
-        x=+x;
+        this->x=+this->x;
         return PhysicalNumber(x,U);
 }
 const PhysicalNumber PhysicalNumber::operator-() {
-        x=-x;
+      this->x=-this->x;
         return PhysicalNumber(x,U);
 }
 // p++ p--

@@ -35,12 +35,12 @@ friend ostream& operator<<(ostream &os, const PhysicalNumber& n);
 friend istream& operator>>(istream &is, PhysicalNumber& n);
 // < , > <= , >=
 
- const bool operator==(const PhysicalNumber& n);
- const bool operator<(const PhysicalNumber& n) ;
- const bool operator>(const PhysicalNumber& n) ;
- const bool operator<=(const PhysicalNumber& n) ;
- const bool operator>=(const PhysicalNumber& n) ;
- const bool operator!=(const PhysicalNumber& n) ;
+ const bool operator==(const PhysicalNumber& n) const;
+ const bool operator<(const PhysicalNumber& n) const;
+ const bool operator>(const PhysicalNumber& n) const;
+ const bool operator<=(const PhysicalNumber& n) const;
+ const bool operator>=(const PhysicalNumber& n) const;
+ const bool operator!=(const PhysicalNumber& n) const;
 
 
 

@@ -8,15 +8,19 @@ Unit U;
 double x;
 
 //convert
-void someType(PhysicalNumber& n);
-void casting()
+
+//void casting()
 public:
+bool someType(const PhysicalNumber& n);
 //constractors
 PhysicalNumber(double x,Unit U);
 // onary
-const PhysicalNumber operator+() const;
-const PhysicalNumber operator-() const;
-//++ and --
+const PhysicalNumber operator+();
+const PhysicalNumber operator-();
+//++p , --p and p++ p--
+PhysicalNumber& operator++(int);
+PhysicalNumber& operator--(int);
+
 PhysicalNumber& operator++();
 PhysicalNumber& operator--();
 //+,-,+=,-=.=
@@ -24,8 +28,8 @@ PhysicalNumber& operator+=(const PhysicalNumber& rsize);
 PhysicalNumber& operator-=(const PhysicalNumber& rsize);
 PhysicalNumber& operator=(const PhysicalNumber& rsize);
 
-const PhysicalNumber operator+(const PhysicalNumber& n) const;
-const PhysicalNumber operator-(const PhysicalNumber& n) const;
+const PhysicalNumber operator+(const PhysicalNumber& n);
+const PhysicalNumber operator-(const PhysicalNumber& n);
 //stream
 friend ostream& operator<<(ostream &os, const PhysicalNumber& n);
 friend istream& operator>>(istream &is, PhysicalNumber& n);

@@ -96,7 +96,7 @@ PhysicalNumber ton0(random[0], Unit::TON);
     .setname("Basic input")
     .CHECK_OK(istringstream("700[kg]") >> a)
     .CHECK_OUTPUT((a += PhysicalNumber(1, Unit::TON)), "1700[kg]")
-     
+
     //case 1 whigh
     .CHECK_OUTPUT(g+kg, "100100[g]")
     .CHECK_OUTPUT((kg+=t), "100100[kg]")
@@ -104,7 +104,7 @@ PhysicalNumber ton0(random[0], Unit::TON);
     .CHECK_OUTPUT(kg+kg, "200200[kg]")
     .CHECK_OUTPUT(kg-kg, "0[kg]")
     .CHECK_OUTPUT((t+=g), "100.0001[ton]")
-        
+
          .CHECK_OUTPUT(kg0-kg1, std::to_string(random[0] - random[1]) +"[kg]")
          .CHECK_OUTPUT(kg1-kg2, std::to_string(random[1] -random[2]) +"[kg]")
          .CHECK_OUTPUT(kg2-kg3, std::to_string(random[2] - random[3]) +"[kg]")
@@ -121,7 +121,7 @@ PhysicalNumber ton0(random[0], Unit::TON);
          .CHECK_OUTPUT(kg0+kg3, std::to_string(random[0] + random[3]) +"[kg]")
          .CHECK_OUTPUT(kg0+kg4, std::to_string(random[0] + random[4]) +"[kg]")
         .CHECK_OUTPUT(kg1+kg3, std::to_string(random[1] + random[3]) +"[kg]")
-        
+
          .CHECK_OUTPUT(ton0-ton1, std::to_string(random[0] - random[1]) +"[ton]")
          .CHECK_OUTPUT(ton1-ton2, std::to_string(random[1] -random[2]) +"[ton]")
          .CHECK_OUTPUT(ton2-ton3, std::to_string(random[2] - random[3]) +"[ton]")
@@ -138,7 +138,7 @@ PhysicalNumber ton0(random[0], Unit::TON);
          .CHECK_OUTPUT(ton0+ton3, std::to_string(random[0] + random[3]) +"[ton]")
          .CHECK_OUTPUT(ton0+ton4, std::to_string(random[0] + random[4]) +"[ton]")
         .CHECK_OUTPUT(ton1+ton3, std::to_string(random[1] + random[3]) +"[ton]")
-    //time 
+    //time
     .CHECK_OUTPUT((h+=d), "300.5[hour]")
     .CHECK_OUTPUT(h, "300.5[hour]")
     .CHECK_OUTPUT((d+d), "60[min]")
@@ -161,8 +161,8 @@ PhysicalNumber ton0(random[0], Unit::TON);
      .CHECK_OUTPUT(minits - hour, "-120[min]")
     .CHECK_OUTPUT(secon - minits, "-3595[sec]")
 
-  
-       
+
+
          .CHECK_OUTPUT(secon0-secon1, std::to_string(random[0] - random[1]) +"[sec]")
          .CHECK_OUTPUT(secon1-secon2, std::to_string(random[1] -random[2]) +"[sec]")
          .CHECK_OUTPUT(secon2-secon3, std::to_string(random[2] - random[3]) +"[sec]")
@@ -179,7 +179,7 @@ PhysicalNumber ton0(random[0], Unit::TON);
          .CHECK_OUTPUT(secon0+secon3, std::to_string(random[0] + random[3]) +"[sec]")
          .CHECK_OUTPUT(secon0+secon4, std::to_string(random[0] + random[4]) +"[sec]")
         .CHECK_OUTPUT(secon1+secon3, std::to_string(random[1] + random[3]) +"[sec]")
-       
+
          .CHECK_OUTPUT(min0-min1, std::to_string(random[0] - random[1]) +"[min]")
          .CHECK_OUTPUT(min1-min2, std::to_string(random[1] -random[2]) +"[min]")
          .CHECK_OUTPUT(min2-min3, std::to_string(random[2] - random[3]) +"[min]")
@@ -201,32 +201,6 @@ PhysicalNumber ton0(random[0], Unit::TON);
         .CHECK_OUTPUT(secon2+min1, std::to_string(random[2] + (random[1]*60)) +"[sec]")
         .CHECK_OUTPUT(secon3+min1, std::to_string(random[3] + (random[1]*60)) +"[sec]")
         .CHECK_OUTPUT(secon1+min2, std::to_string(random[1] + (random[2]*60)) +"[sec]")
-
-
-
-         
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-   
-
-
-
-
-
-
-
       .setname("...")
 
       .print(cout, /*show_grade=*/false);

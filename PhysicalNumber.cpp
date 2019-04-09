@@ -22,7 +22,7 @@ const PhysicalNumber PhysicalNumber::operator+() {
         return PhysicalNumber(x,U);
 }
 const PhysicalNumber PhysicalNumber::operator-() {
-      this->x=-this->x;
+        this->x=-this->x;
         return PhysicalNumber(x,U);
 }
 // p++ p--
@@ -83,7 +83,35 @@ ostream& ariel::operator<<(ostream &os, const PhysicalNumber& n){
 
         return (os <<n.x<< "[" << name[(int)n.U] << "]");
 }
+bool is_number(const std::string& s)
+{
+        std::string::const_iterator it = s.begin();
+        while (it != s.end() && std::isdigit(*it)) ++it;
+        return !s.empty() && it == s.end();
+}
 istream& ariel::operator>>(istream &is, PhysicalNumber& n){
+
+        string num,s,type;
+        bool flag=false;
+        is>>s;
+        num = s.substr(0, s.find("["));
+        if(is_number(num)) {
+                flag=true;
+        }
+
+        n.x=stod(num);
+
+        type=s.substr(s.find("[")+1,s.length() - s.find("[")-2 );
+        for(size_t i = 0; i < 9; i++) {
+                if(name[i] == type) {
+                        n.U = (Unit)i;
+                        flag=true;
+                }
+        }
+
+        if(flag==false) {
+                __throw_invalid_argument("syntaxt not good");
+        }
         return is;
 }
 //bool == < > <= >=

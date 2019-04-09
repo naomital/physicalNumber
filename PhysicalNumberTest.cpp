@@ -94,8 +94,8 @@ int main() {
                 .CHECK_THROWS(b+c)
                 .CHECK_THROWS(b+d)
                 .setname("Basic input")
-                //.CHECK_OK(istringstream("700[kg]") >> a)
-                //.CHECK_OUTPUT((a += PhysicalNumber(1, Unit::TON)), "1700[kg]")
+                .CHECK_OK(istringstream("700[kg]") >> a)
+                .CHECK_OUTPUT((a += PhysicalNumber(1, Unit::TON)), "1700[kg]")
 
                 //case 1 whigh
                 .CHECK_OUTPUT(g+kg, "100100[g]")

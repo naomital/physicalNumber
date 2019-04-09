@@ -11,7 +11,7 @@ PhysicalNumber::PhysicalNumber(double x1,Unit U1){
         x=x1;
         U=U1;
 }
-bool PhysicalNumber::someType(const PhysicalNumber& n){
+bool PhysicalNumber::someType(const PhysicalNumber& n) const{
         if(((int)n.U >= 0 && (int)n.U <=2) && ((int)this->U>=0&&(int)this->U<=2)) {return true;}
         else if (((int)n.U >= 3 && (int)n.U <=5) && ((int)this->U>=3&&(int)this->U<=5)) {return true;}
         else if (((int)n.U >= 6 && (int)n.U <=8) && ((int)this->U>=6&&(int)this->U<=8)) {return true;}
@@ -51,7 +51,7 @@ PhysicalNumber& PhysicalNumber::operator+=(const PhysicalNumber& n){
                 return *this;
         }
 }
-PhysicalNumber& PhysicalNumber::operator-=(const PhysicalNumber& n){
+PhysicalNumber& PhysicalNumber::operator-=(const PhysicalNumber& n) {
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                 this->x = this->x-(n.x * (double(value[(int)n.U]) / value[(int)this->U]));
@@ -64,14 +64,14 @@ PhysicalNumber& PhysicalNumber::operator=(const PhysicalNumber& n){
         return *this;
 }
 
-const PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& n) {
+const PhysicalNumber PhysicalNumber::operator+(const PhysicalNumber& n) const {
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                 long double answer = this->x + (n.x * (double(value[(int)n.U]) / value[(int)this->U]));
                 return PhysicalNumber(answer,this->U);
         }
 }
-const PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber& n) {
+const PhysicalNumber PhysicalNumber::operator-(const PhysicalNumber& n) const{
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                 long double answer = this->x - (n.x * (double(value[(int)n.U]) / value[(int)this->U]));

@@ -11,7 +11,7 @@ double x;
 
 //void casting()
 public:
-bool someType(const PhysicalNumber& n);
+bool someType(const PhysicalNumber& n) const;
 //constractors
 PhysicalNumber(double x,Unit U);
 // onary
@@ -28,8 +28,8 @@ PhysicalNumber& operator+=(const PhysicalNumber& rsize);
 PhysicalNumber& operator-=(const PhysicalNumber& rsize);
 PhysicalNumber& operator=(const PhysicalNumber& rsize);
 
-const PhysicalNumber operator+(const PhysicalNumber& n);
-const PhysicalNumber operator-(const PhysicalNumber& n);
+const PhysicalNumber operator+(const PhysicalNumber& n) const;
+const PhysicalNumber operator-(const PhysicalNumber& n) const;
 //stream
 friend ostream& operator<<(ostream &os, const PhysicalNumber& n);
 friend istream& operator>>(istream &is, PhysicalNumber& n);

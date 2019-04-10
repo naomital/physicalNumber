@@ -121,7 +121,7 @@ const bool PhysicalNumber::operator==(const PhysicalNumber& n) const{
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                  double answer =  (n.x * (double(value[(int)n.U]) / value[(int)this->U]));
-                return x==answer;
+                return answer==x;
         }
 
 }
@@ -129,7 +129,7 @@ const bool PhysicalNumber::operator<(const PhysicalNumber& n) const{
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                  double answer =  (n.x * (double(value[(int)n.U]) / value[(int)this->U]));
-                return x<answer;
+                return answer<x;
         }
 
 }
@@ -137,27 +137,27 @@ const bool PhysicalNumber::operator>(const PhysicalNumber& n) const{
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                  double answer = (n.x * (double(value[(int)n.U]) / value[(int)this->U]));
-                return x>answer;
+                return answer>x;
         }
 }
 const bool PhysicalNumber::operator<=(const PhysicalNumber& n) const{
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                  double answer = (n.x * (double(value[(int)n.U]) / value[(int)this->U]));
-                return x<=answer;
+                return answer<=x;
         }
 }
 const bool PhysicalNumber::operator>=(const PhysicalNumber& n) const{
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                  double answer =  (n.x * (double(value[(int)n.U]) / value[(int)this->U]));
-                return x>=answer;
+                return answer>=x;
         }
 }
 const bool PhysicalNumber::operator!=(const PhysicalNumber& n) const{
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                  double answer = (n.x * (double(value[(int)n.U]) / value[(int)this->U]));
-                return x!=answer;
+                return answer!=x;
         }
 }

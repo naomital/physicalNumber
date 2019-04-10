@@ -5,7 +5,7 @@ using namespace std;
 using namespace ariel;
 //2 km + 300 m 300*100 = 30000/100000 = 2.3
 //300m + 2km =2*100000 =200000/100 = 2300
-const double value[9]={1, 100, 100000, 1, 60, 3600, (int)1, 1000, 1000000};
+const double value[9]={1, 100, 100000, 1, 60, 3600, 1, 1000, 1000000};
 const string name[9]={"cm", "m", "km", "sec", "min", "hour", "g", "kg", "ton"};
 PhysicalNumber::PhysicalNumber(double x1,Unit U1){
         x=x1;
@@ -26,13 +26,15 @@ const PhysicalNumber PhysicalNumber::operator-() {
         return PhysicalNumber(x,U);
 }
 // p++ p--
-PhysicalNumber& PhysicalNumber::operator++(int){
+PhysicalNumber PhysicalNumber::operator++(int){
+  PhysicalNumber a(this->x,this->U);
         this->x=this->x+1;
-        return *this;
+        return a;
 }
-PhysicalNumber& PhysicalNumber::operator--(int){
+PhysicalNumber PhysicalNumber::operator--(int){
+  PhysicalNumber a(this->x,this->U);
         this->x=this->x-1;
-        return *this;
+        return a;
 }
 //++p , --p
 PhysicalNumber& PhysicalNumber::operator++(){

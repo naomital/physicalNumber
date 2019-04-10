@@ -5,7 +5,6 @@
  * @since 2019-02
  */
 
-#include <string>
 #include <iostream>
 #include <sstream>
 using std::cout, std::endl, std::istringstream;
@@ -14,201 +13,174 @@ using ariel::PhysicalNumber, ariel::Unit;
 #include "badkan.hpp"
 
 int main() {
-        badkan::TestCase testcase;
-        int grade=0;
-        int signal = setjmp(badkan::longjmp_buffer);
-        if (signal == 0) {
+  badkan::TestCase testcase;
+  int grade=0;
+  int signal = setjmp(badkan::longjmp_buffer);
+  if (signal == 0) {
 
-                // BASIC TESTS - DO NOT CHANGE
-                PhysicalNumber a(2, Unit::KM);
-                PhysicalNumber b(300, Unit::M);
-                PhysicalNumber c(2, Unit::HOUR);
-                PhysicalNumber d(30, Unit::MIN);
+    // BASIC TESTS - DO NOT CHANGE
+    PhysicalNumber a(2, Unit::KM);
+    PhysicalNumber b(300, Unit::M);
+    PhysicalNumber c(2, Unit::HOUR);
+    PhysicalNumber d(30, Unit::MIN);
 
-                PhysicalNumber km(2, Unit::KM);
-                PhysicalNumber m(300, Unit::M);
-                PhysicalNumber cm(2, Unit::CM);
-
-                PhysicalNumber s(2, Unit::SEC);
-                PhysicalNumber h(300, Unit::HOUR);
-                PhysicalNumber min(2, Unit::MIN);
-
-                PhysicalNumber g(100, Unit::G);
-                PhysicalNumber kg(100, Unit::KG);
-                PhysicalNumber t(100, Unit::TON);
-                int random[5] = {rand()%100,rand()%100,rand()%100,rand()%100,rand()%100};
-                PhysicalNumber kg0(random[0], Unit::KG);
-                PhysicalNumber kg1(random[1], Unit::KG);
-                PhysicalNumber kg2(random[2], Unit::KG);
-                PhysicalNumber kg3(random[3], Unit::KG);
-                PhysicalNumber kg4(random[4], Unit::KG);
-                PhysicalNumber ton0(random[0], Unit::TON);
-                PhysicalNumber ton1(random[1], Unit::TON);
-                PhysicalNumber ton2(random[2], Unit::TON);
-                PhysicalNumber ton3(random[3], Unit::TON);
-                PhysicalNumber ton4(random[4], Unit::TON);
-                PhysicalNumber secon(5, Unit::SEC);
-                PhysicalNumber hour(3, Unit::HOUR);
-                PhysicalNumber minits(60, Unit::MIN);
-                PhysicalNumber secon0(random[0], Unit::SEC);
-                PhysicalNumber secon1(random[1], Unit::SEC);
-                PhysicalNumber secon2(random[2], Unit::SEC);
-                PhysicalNumber secon3(random[3], Unit::SEC);
-                PhysicalNumber secon4(random[4], Unit::SEC);
-                PhysicalNumber min0(random[0], Unit::MIN);
-                PhysicalNumber min1(random[1], Unit::MIN);
-                PhysicalNumber min2(random[2], Unit::MIN);
-                PhysicalNumber min3(random[3], Unit::MIN);
-                PhysicalNumber min4(random[4], Unit::MIN);
-
-                testcase
-                .setname("Basic output")
-                .CHECK_OUTPUT(a, "2[km]")
-                .CHECK_OUTPUT(b, "300[m]")
-                .CHECK_OUTPUT(c, "2[hour]")
-                .CHECK_OUTPUT(d, "30[min]")
-                .CHECK_OUTPUT(km, "2[km]")
-                .CHECK_OUTPUT(m, "300[m]")
-                .CHECK_OUTPUT(cm, "2[cm]")
-                .CHECK_OUTPUT(s, "2[sec]")
-                .CHECK_OUTPUT(h, "300[hour]")
-                .CHECK_OUTPUT(min, "2[min]")
-                .CHECK_OUTPUT(g, "100[g]")
-                .CHECK_OUTPUT(kg, "100[kg]")
-                .CHECK_OUTPUT(t, "100[ton]")
+    PhysicalNumber Gram(30, Unit::G);
+    PhysicalNumber Cm(30, Unit::CM);
+    PhysicalNumber KM(30, Unit::KM);
+    PhysicalNumber MET(200, Unit::M);
 
 
-                .setname("Compatible dimensions")
-                .CHECK_OUTPUT(b+a, "2300[m]")
-                .CHECK_OUTPUT((a+=b), "2.3[km]")
-                .CHECK_OUTPUT(a, "2.3[km]")
-                .CHECK_OUTPUT(a+a, "4.6[km]")
-                .CHECK_OUTPUT(b-b, "0[m]")
-                .CHECK_OUTPUT(c, "2[hour]")
-                .CHECK_OUTPUT(d, "30[min]")
-                .CHECK_OUTPUT(d+c, "150[min]")
+    testcase
+    .setname("Basic output")
+    .CHECK_OUTPUT(a, "2[km]")
+    .CHECK_OUTPUT(b, "300[m]")
 
-                .setname("Incompatible dimensions")
-                .CHECK_THROWS(a+c)
-                .CHECK_THROWS(a+d)
-                .CHECK_THROWS(b+c)
-                .CHECK_THROWS(b+d)
-                .setname("Basic input")
-                .CHECK_OK(istringstream("700[kg]") >> a)
-                .CHECK_OUTPUT((a += PhysicalNumber(1, Unit::TON)), "1700[kg]")
+    .setname("Compatible dimensions")
+    .CHECK_OUTPUT(b+a, "2300[m]")
+    .CHECK_OUTPUT((a+=b), "2.3[km]")
+    .CHECK_OUTPUT(a, "2.3[km]")
+    .CHECK_OUTPUT(a+a, "4.6[km]")
+    .CHECK_OUTPUT(b-b, "0[m]")
+    .CHECK_OUTPUT(c, "2[hour]")
+    .CHECK_OUTPUT(d, "30[min]")
+    .CHECK_OUTPUT(d+c, "150[min]")
 
-                //case 1 whigh
-                .CHECK_OUTPUT(g+kg, "100100[g]")
-                .CHECK_OUTPUT((kg+=t), "100100[kg]")
-                .CHECK_THROWS(t-h)
-                .CHECK_OUTPUT(kg+kg, "200200[kg]")
-                .CHECK_OUTPUT(kg-kg, "0[kg]")
-                .CHECK_OUTPUT((t+=g), "100[ton]")
+    .setname("Incompatible dimensions")
+    .CHECK_THROWS(a+c)
+    .CHECK_THROWS(a+d)
+    .CHECK_THROWS(b+c)
+    .CHECK_THROWS(b+d)
 
-                .CHECK_OUTPUT(kg0-kg1, std::to_string(random[0] - random[1]) +"[kg]")
-                .CHECK_OUTPUT(kg1-kg2, std::to_string(random[1] -random[2]) +"[kg]")
-                .CHECK_OUTPUT(kg2-kg3, std::to_string(random[2] - random[3]) +"[kg]")
-                .CHECK_OUTPUT(kg3-kg4, std::to_string(random[3] - random[4]) +"[kg]")
-                .CHECK_OUTPUT(kg0-kg2, std::to_string(random[0] - random[2]) +"[kg]")
-                .CHECK_OUTPUT(kg0-kg3, std::to_string(random[0] - random[3]) +"[kg]")
-                .CHECK_OUTPUT(kg0-kg4, std::to_string(random[0] - random[4]) +"[kg]")
-                .CHECK_OUTPUT(kg1-kg3, std::to_string(random[1] - random[3]) +"[kg]")
-                .CHECK_OUTPUT(kg0+kg1, std::to_string(random[0] + random[1]) +"[kg]")
-                .CHECK_OUTPUT(kg1+kg2,std::to_string (random[1] +random[2]) +"[kg]")
-                .CHECK_OUTPUT(kg2+kg3, std::to_string(random[2] + random[3]) +"[kg]")
-                .CHECK_OUTPUT(kg3+kg4, std::to_string(random[3] + random[4]) +"[kg]")
-                .CHECK_OUTPUT(kg0+kg2, std::to_string(random[0] + random[2]) +"[kg]")
-                .CHECK_OUTPUT(kg0+kg3, std::to_string(random[0] + random[3]) +"[kg]")
-                .CHECK_OUTPUT(kg0+kg4, std::to_string(random[0] + random[4]) +"[kg]")
-                .CHECK_OUTPUT(kg1+kg3, std::to_string(random[1] + random[3]) +"[kg]")
 
-                .CHECK_OUTPUT(ton0-ton1, std::to_string(random[0] - random[1]) +"[ton]")
-                .CHECK_OUTPUT(ton1-ton2, std::to_string(random[1] -random[2]) +"[ton]")
-                .CHECK_OUTPUT(ton2-ton3, std::to_string(random[2] - random[3]) +"[ton]")
-                .CHECK_OUTPUT(ton3-ton4,std::to_string (random[3] - random[4]) +"[ton]")
-                .CHECK_OUTPUT(ton0-ton2, std::to_string(random[0] - random[2]) +"[ton]")
-                .CHECK_OUTPUT(ton0-ton3, std::to_string(random[0] - random[3]) +"[ton]")
-                .CHECK_OUTPUT(ton0-ton4,std::to_string (random[0] - random[4]) +"[ton]")
-                .CHECK_OUTPUT(ton1-ton3, std::to_string(random[1] - random[3]) +"[ton]")
-                .CHECK_OUTPUT(ton0+ton1, std::to_string(random[0] + random[1]) +"[ton]")
-                .CHECK_OUTPUT(ton1+ton2, std::to_string(random[1] +random[2]) +"[ton]")
-                .CHECK_OUTPUT(ton2+ton3, std::to_string(random[2] + random[3]) +"[ton]")
-                .CHECK_OUTPUT(ton3+ton4, std::to_string(random[3] + random[4]) +"[ton]")
-                .CHECK_OUTPUT(ton0+ton2, std::to_string(random[0] + random[2]) +"[ton]")
-                .CHECK_OUTPUT(ton0+ton3, std::to_string(random[0] + random[3]) +"[ton]")
-                .CHECK_OUTPUT(ton0+ton4, std::to_string(random[0] + random[4]) +"[ton]")
-                .CHECK_OUTPUT(ton1+ton3, std::to_string(random[1] + random[3]) +"[ton]")
-                //time
-                .CHECK_OUTPUT((h+=d), "300.5[hour]")
-                .CHECK_OUTPUT(h, "300.5[hour]")
-                .CHECK_OUTPUT((d+d), "60[min]")
-                .CHECK_OUTPUT((c-c), "0[hour]")
-                .CHECK_OUTPUT((d-d), "0[min]")
-                .CHECK_OUTPUT((s-s), "0[sec]")
-                .CHECK_OUTPUT((min+c), "122[min]")
-                .CHECK_OUTPUT((c-=d), "1.5[hour]")
-                .CHECK_OUTPUT(c, "1.5[hour]")
-                .CHECK_OUTPUT((s+=min), "122[sec]")
-                .CHECK_OUTPUT(s, "122[sec]")
-                .CHECK_OUTPUT((min-d), "-28[min]")
-                .CHECK_OUTPUT((d+=min), "32[min]")
-                .CHECK_OUTPUT((d+=c), "122[min]")
-                .CHECK_OUTPUT((d+=h), "18152[min]")
-                .CHECK_OUTPUT((d+=s), "18154[min]")
-                .CHECK_OUTPUT(secon, "5[sec]")
-                .CHECK_OUTPUT(hour, "3[hour]")
-                .CHECK_OUTPUT(minits, "60[min]")
-                .CHECK_OUTPUT(minits - hour, "-120[min]")
-                .CHECK_OUTPUT(secon - minits, "-3595[sec]")
+    .setname("Basic input")
+    .CHECK_OK(istringstream("700[kg]") >> a)
+    .CHECK_OUTPUT((a += PhysicalNumber(1, Unit::TON)), "1700[kg]")
+
+    // YOUR TESTS - INSERT AS MANY AS YOU WANT
+
+      .setname("Should not work")
+      .CHECK_THROWS(Gram+Cm)
+      .CHECK_THROWS(Cm+Gram)
+      .CHECK_THROWS(Gram+=Cm)
+      .CHECK_THROWS(Cm+=Gram)
+      .CHECK_THROWS(Cm-=Gram)
+      .CHECK_THROWS(Gram-=Cm)
+      .CHECK_THROWS(Cm-Gram)
+      .CHECK_THROWS(Gram-Cm)
+      .CHECK_THROWS(Cm < Gram)
+      .CHECK_THROWS(Gram > KM)
+      .CHECK_THROWS(Gram >= KM)
+      .CHECK_THROWS(Cm <= Gram)
+      .CHECK_THROWS(KM <= Gram)
+      .CHECK_THROWS(a <= b)
+      .CHECK_THROWS(b <= c)
+      .CHECK_THROWS(b += Gram)
+      .CHECK_THROWS(a -= d)
+      .CHECK_THROWS(c += MET)
+      .CHECK_THROWS(c -= MET)
+      .CHECK_THROWS(MET -= c)
+      .CHECK_THROWS(MET += c)
+      .CHECK_THROWS(Gram < KM)
+      .CHECK_OK(istringstream("200[g") >> Gram)
+      .CHECK_OK(istringstream("0.2[]") >> a)
+      .CHECK_OK(istringstream("200g]") >> Gram)
+      .CHECK_OK(istringstream("0.2[kgg]") >> a)
+      .CHECK_OK(istringstream("122.2kg") >> a)
+      .CHECK_OK(istringstream("1332.2[to n]") >> a)
+      .CHECK_OK(istringstream("[ton]1332.2") >> a)
+
+
+      .setname("Should work")
+      .CHECK_OUTPUT(++Gram, "31[g]")
+      .CHECK_OUTPUT(--Gram, "30[g]")
+      .CHECK_OUTPUT(--Cm, "29[cm]")
+      .CHECK_OUTPUT(++Cm, "30[cm]")
+      .CHECK_OUTPUT((Gram+=Gram), "60[g]")
+      .CHECK_OUTPUT((Cm+=Cm), "60[cm]")
+      .CHECK_OUTPUT((-Gram),"-60[g]")
+      .CHECK_OUTPUT(+Gram,"60[g]")
+      .CHECK_OUTPUT(Gram-Gram,"0[g]")
+      .CHECK_OUTPUT((KM+=MET) , "30.2[km]")
+      .CHECK_OUTPUT((Cm-=Cm),"0[cm]")
+      .CHECK_OUTPUT(Cm,"0[cm]")
+      .CHECK_OUTPUT((Cm+=MET),"20000[cm]")
+      .CHECK_OUTPUT((MET+=Cm) , "400[m]")
+      .CHECK_OUTPUT((++MET) , "401[m]")
+      .CHECK_OUTPUT((--MET) , "400[m]")
+      .CHECK_OUTPUT((-MET) , "-400[m]")
+      .CHECK_OUTPUT((+MET) , "400[m]")
+      .CHECK_OUTPUT(Gram++, "60[g]")
+      .CHECK_OUTPUT(Gram, "61[g]")
+      .CHECK_OUTPUT(Gram--, "61[g]")
+      .CHECK_OUTPUT(Gram, "60[g]")
 
 
 
-                .CHECK_OUTPUT(secon0-secon1, std::to_string(random[0] - random[1]) +"[sec]")
-                .CHECK_OUTPUT(secon1-secon2, std::to_string(random[1] -random[2]) +"[sec]")
-                .CHECK_OUTPUT(secon2-secon3, std::to_string(random[2] - random[3]) +"[sec]")
-                .CHECK_OUTPUT(secon3-secon4, std::to_string(random[3] - random[4]) +"[sec]")
-                .CHECK_OUTPUT(secon0-secon2, std::to_string(random[0] - random[2]) +"[sec]")
-                .CHECK_OUTPUT(secon0-secon3, std::to_string(random[0] - random[3]) +"[sec]")
-                .CHECK_OUTPUT(secon0-secon4, std::to_string(random[0] - random[4]) +"[sec]")
-                .CHECK_OUTPUT(secon1-secon3, std::to_string(random[1] - random[3]) +"[sec]")
-                .CHECK_OUTPUT(secon0+secon1, std::to_string(random[0] + random[1]) +"[sec]")
-                .CHECK_OUTPUT(secon1+secon2, std::to_string(random[1] +random[2]) +"[sec]")
-                .CHECK_OUTPUT(secon2+secon3, std::to_string(random[2] + random[3]) +"[sec]")
-                .CHECK_OUTPUT(secon3+secon4, std::to_string(random[3] + random[4]) +"[sec]")
-                .CHECK_OUTPUT(secon0+secon2, std::to_string(random[0] + random[2]) +"[sec]")
-                .CHECK_OUTPUT(secon0+secon3, std::to_string(random[0] + random[3]) +"[sec]")
-                .CHECK_OUTPUT(secon0+secon4, std::to_string(random[0] + random[4]) +"[sec]")
-                .CHECK_OUTPUT(secon1+secon3, std::to_string(random[1] + random[3]) +"[sec]")
+      .CHECK_EQUAL(Cm < KM, true)
+      .CHECK_EQUAL(Cm > KM, false)
+      .CHECK_EQUAL(Cm != KM, true)
+      .CHECK_EQUAL(Cm == KM, false)
+      .CHECK_EQUAL(Cm == Cm, true)
+      .CHECK_EQUAL(MET > Cm, true)
+      .CHECK_EQUAL(MET != Cm, true)
+      .CHECK_EQUAL(MET > Cm, true)
+      .CHECK_EQUAL(MET >= Cm, true)
+      .CHECK_OK(istringstream("200[m]") >> MET)
+      .CHECK_OUTPUT(MET, "200[m]")
+      .CHECK_EQUAL(MET == Cm, true)
+      .CHECK_OK(istringstream("2000[g]") >> Gram)
+      .CHECK_OK(istringstream("2[kg]") >> a)
+      .CHECK_OUTPUT(a, "2[kg]")
+      .CHECK_EQUAL(Gram == a, true)
+      .CHECK_EQUAL(Gram != a, false)
+      .CHECK_OUTPUT((--Gram) , "1999[g]")
+      .CHECK_EQUAL(Gram != a, true)
+      .CHECK_EQUAL(Gram == a, false)
+      .CHECK_OK(istringstream("200[g]") >> Gram)
+      .CHECK_OK(istringstream("0.2[kg]") >> a)
+      .CHECK_OUTPUT(Gram , "200[g]")
+      .CHECK_OUTPUT(a , "0.2[kg]")
+      .CHECK_EQUAL(Gram != a, false)
+      .CHECK_EQUAL(Gram == a, true)
 
-                .CHECK_OUTPUT(min0-min1, std::to_string(random[0] - random[1]) +"[min]")
-                .CHECK_OUTPUT(min1-min2, std::to_string(random[1] -random[2]) +"[min]")
-                .CHECK_OUTPUT(min2-min3, std::to_string(random[2] - random[3]) +"[min]")
-                .CHECK_OUTPUT(min3-min4, std::to_string(random[3] - random[4]) +"[min]")
-                .CHECK_OUTPUT(min0-min2, std::to_string(random[0] - random[2]) +"[min]")
-                .CHECK_OUTPUT(min0-min3, std::to_string(random[0] - random[3]) +"[min]")
-                .CHECK_OUTPUT(min0-min4, std::to_string(random[0] - random[4]) +"[min]")
-                .CHECK_OUTPUT(min1-min3, std::to_string(random[1] - random[3]) +"[min]")
-                .CHECK_OUTPUT(min0+min1, std::to_string(random[0] + random[1]) +"[min]")
-                .CHECK_OUTPUT(min1+min2, std::to_string(random[1] +random[2]) +"[min]")
-                .CHECK_OUTPUT(min2+min3, std::to_string(random[2] + random[3]) +"[min]")
-                .CHECK_OUTPUT(min3+min4, std::to_string(random[3] + random[4]) +"[min]")
-                .CHECK_OUTPUT(min0+min2, std::to_string(random[0] + random[2]) +"[min]")
-                .CHECK_OUTPUT(min0+min3, std::to_string(random[0] + random[3]) +"[min]")
-                .CHECK_OUTPUT(min0+min4, std::to_string(random[0] + random[4]) +"[min]")
-                .CHECK_OUTPUT(min1+min3, std::to_string(random[1] + random[3]) +"[min]")
-                .CHECK_OUTPUT(secon1+min1, std::to_string(random[1] + (random[1]*60)) +"[sec]")
-                .CHECK_OUTPUT(secon0+min1, std::to_string(random[0] + (random[1]*60)) +"[sec]")
-                .CHECK_OUTPUT(secon2+min1, std::to_string(random[2] + (random[1]*60)) +"[sec]")
-                .CHECK_OUTPUT(secon3+min1, std::to_string(random[3] + (random[1]*60)) +"[sec]")
-                .CHECK_OUTPUT(secon1+min2, std::to_string(random[1] + (random[2]*60)) +"[sec]")
-                .setname("...")
+      .CHECK_OK(istringstream("30[min]") >> b)
+      .CHECK_OK(istringstream("0.5[hour]") >> c)
+      .CHECK_OUTPUT(b , "30[min]")
+      .CHECK_OUTPUT(c , "0.5[hour]")
 
-                .print(cout, /*show_grade=*/ false);
-                grade = testcase.grade();
-        } else {
-                testcase.print_signal(signal);
-                grade = 0;
-        }
-        cout <<  "*** Grade: " << grade << " ***" << endl;
-        return grade;
+      .CHECK_OK(istringstream("1[ton]") >> b)
+      .CHECK_OK(istringstream("1000[kg]") >> c)
+      .CHECK_OUTPUT(b , "1[ton]")
+      .CHECK_OUTPUT(c , "1000[kg]")
+
+      .CHECK_EQUAL(b != c, false)
+      .CHECK_EQUAL(b == c, true)
+
+      .CHECK_OK(istringstream("0.5[km]") >> b)
+      .CHECK_OK(istringstream("500[m]") >> c)
+      .CHECK_OUTPUT(b , "0.5[km]")
+      .CHECK_OUTPUT(c , "500[m]")
+
+      .CHECK_EQUAL(b != c, false)
+      .CHECK_EQUAL(b == c, true)
+      .CHECK_OUTPUT((b+b+c), "1.5[km]")
+      .CHECK_OUTPUT((c+b+b), "1500[m]")
+      .CHECK_OUTPUT((c+b-b), "500[m]")
+      .CHECK_OUTPUT((b-c-c+b), "0[km]")
+      .CHECK_EQUAL((b+c > b), true)
+      .CHECK_EQUAL((b-c < b), true)
+      .CHECK_OUTPUT((b+=c+=b), "1.5[km]")
+      .CHECK_OUTPUT(b, "1.5[km]")
+      .CHECK_OUTPUT(c, "1000[m]")
+
+
+      .print(cout, /*show_grade=*/false);
+      grade = testcase.grade();
+    } else {
+      testcase.print_signal(signal);
+      grade = 0;
+    }
+
+    cout <<  "*** Grade: " << grade << " ***" << endl;
+    return grade;
 }

@@ -18,8 +18,8 @@ PhysicalNumber(double x,Unit U);
 const PhysicalNumber operator+();
 const PhysicalNumber operator-();
 //++p , --p and p++ p--
-PhysicalNumber& operator++(int);
-PhysicalNumber& operator--(int);
+PhysicalNumber operator++(int);
+PhysicalNumber operator--(int);
 
 PhysicalNumber& operator++();
 PhysicalNumber& operator--();

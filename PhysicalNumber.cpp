@@ -54,7 +54,7 @@ PhysicalNumber& PhysicalNumber::operator+=(const PhysicalNumber& n){
         }
 }
 PhysicalNumber& PhysicalNumber::operator-=(const PhysicalNumber& n) {
-        if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
+        if(someType(n)==false) {__throw_invalid_argument("Not some type");}
         else{
                 this->x = this->x-(n.x * (double(value[(int)n.U]) / value[(int)this->U]));
                 return *this;
@@ -99,11 +99,12 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
         num = s.substr(0, s.find("["));
         if(is_number(num)) {
                 flag=true;
+                n.x=stod(num);
         }
 
-        n.x=stod(num);
+       
 
-        type=s.substr(s.find("[")+1,s.length() - s.find("[")-2 );
+        type=s.substr(s.find("[")+1,s.length() -s.find("[")-2);
         for(size_t i = 0; i < 9; i++) {
                 if(name[i] == type) {
                         n.U = (Unit)i;
@@ -112,7 +113,8 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
         }
 
         if(flag==false) {
-                __throw_invalid_argument("syntaxt not good");
+               __throw_invalid_argument("syntaxt not good");
+               
         }
         return is;
 }
@@ -129,7 +131,7 @@ const bool PhysicalNumber::operator<(const PhysicalNumber& n) const{
         if(someType(n)==false) {  __throw_invalid_argument("Not some type");}
         else{
                  double answer =  (n.x * (double(value[(int)n.U]) / value[(int)this->U]));
-                return x<answer;
+                return x < answer;
         }
 
 }

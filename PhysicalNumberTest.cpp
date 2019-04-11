@@ -1,5 +1,5 @@
 
-    
+
 /**
  * Examples of automatic tests for the exercise on physical numbers.
  *

@@ -114,6 +114,7 @@ auto errorState = is.rdstate();
           is.clear(); // clear error so seekg will work
           is.seekg(startPosition); // rewind
           is.clear(errorState); // set back the error flag
+          return is;
         }
         flag=false;
         if(is_number(num)) {
@@ -125,11 +126,13 @@ auto errorState = is.rdstate();
           is.clear(); // clear error so seekg will work
           is.seekg(startPosition); // rewind
           is.clear(errorState); // set back the error flag
+          return is;
         }
         if(flag==false) {
           is.clear(); // clear error so seekg will work
           is.seekg(startPosition); // rewind
           is.clear(errorState); // set back the error flag
+          return is;
         }
         return is;
 }

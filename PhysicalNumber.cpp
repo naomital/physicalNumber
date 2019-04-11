@@ -20,7 +20,7 @@ bool PhysicalNumber::someType(const PhysicalNumber& n) const{
         else{return false;}
 }
 const PhysicalNumber PhysicalNumber::operator+() {
-        this->x=+ this->x;
+        this->x=(+this->x);
         return PhysicalNumber(x,U);
 }
 const PhysicalNumber PhysicalNumber::operator-() {
@@ -90,7 +90,7 @@ ostream& ariel::operator<<(ostream &os, const PhysicalNumber& n){
 bool is_number(const std::string& s)
 {
         std::string::const_iterator it = s.begin();
-        while (it != s.end() && std::isdigit(*it)) ++it;
+        while (it != s.end() && (std::isdigit(*it) || *it=='.')) ++it;
         return !s.empty() && it == s.end();
 }
 istream& ariel::operator>>(istream &is, PhysicalNumber& n){
@@ -100,7 +100,6 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
         is>>s;
         num = s.substr(0, s.find("["));
         if(is_number(num)) {
-printf("iiii");
                 flag=true;
                 n.x=stod(num);
         }

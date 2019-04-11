@@ -99,6 +99,7 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
         is>>s;
         num = s.substr(0, s.find("["));
         if(is_number(num)) {
+printf("iiii");
                 flag=true;
                 n.x=stod(num);
         }

@@ -96,6 +96,8 @@ bool is_number(const std::string& s)
         return !s.empty() && it == s.end();
 }
 istream& ariel::operator>>(istream &is, PhysicalNumber& n){
+ios::pos_type startPosition = is.tellg();
+auto errorState = is.rdstate();
 
         string num,s,type;
         bool flag=false;
@@ -103,13 +105,15 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
         num = s.substr(0, s.find("["));
         type=s.substr(s.find("[")+1,s.length() -s.find("[")-2);
         for(size_t i = 0; i < 9; i++) {
-                if(name[i] == type) {
+                if(!type.compare(name[i])) {
                         n.U = (Unit)i;
                         flag=true;
                 }
         }
         if(flag==false){
-            __throw_invalid_argument("syntaxt not good");
+          is.clear(); // clear error so seekg will work
+          is.seekg(startPosition); // rewind
+          is.clear(errorState); // set back the error flag
         }
         flag=false;
         if(is_number(num)) {
@@ -118,12 +122,22 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
         }
 
         if(s.find("[")==string::npos||s.find("]")==string::npos) {
-                __throw_invalid_argument("syntaxt not good");
+          is.clear(); // clear error so seekg will work
+          is.seekg(startPosition); // rewind
+          is.clear(errorState); // set back the error flag
         }
         if(flag==false) {
-                __throw_invalid_argument("syntaxt not good");
+          is.clear(); // clear error so seekg will work
+          is.seekg(startPosition); // rewind
+          is.clear(errorState); // set back the error flag
         }
         return is;
+}
+void errorStream(istream &is,ios::pos_type startPosition) {
+  auto errorState = is.rdstate();
+  is.clear(); // clear error so seekg will work
+  is.seekg(startPosition); // rewind
+  is.clear(errorState); // set back the error flag
 }
 //bool == < > <= >=
 const bool PhysicalNumber::operator==(const PhysicalNumber& n) const {

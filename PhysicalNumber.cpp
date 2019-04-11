@@ -20,7 +20,7 @@ bool PhysicalNumber::someType(const PhysicalNumber& n) const{
         else{return false;}
 }
 const PhysicalNumber PhysicalNumber::operator+() {
-        this->x=abs(this->x);
+        this->x=abs(x);
         return PhysicalNumber(x,U);
 }
 const PhysicalNumber PhysicalNumber::operator-() {

@@ -20,11 +20,14 @@ bool PhysicalNumber::someType(const PhysicalNumber& n) const {
         else{return false;}
 }
 const PhysicalNumber PhysicalNumber::operator+() {
+  if(this->x < 0){
+        return PhysicalNumber((-1*x),U);
+  }else{
         return PhysicalNumber(x,U);
 }
+}
 const PhysicalNumber PhysicalNumber::operator-() {
-        this->x=(-1*this->x);
-        return PhysicalNumber(x,U);
+        return PhysicalNumber((-1*x),U);
 }
 // p++ p--
 PhysicalNumber PhysicalNumber::operator++(int){

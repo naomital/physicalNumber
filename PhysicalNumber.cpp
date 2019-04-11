@@ -20,11 +20,11 @@ bool PhysicalNumber::someType(const PhysicalNumber& n) const {
         else{return false;}
 }
 const PhysicalNumber PhysicalNumber::operator+() {
-  if(this->x < 0){
-        return PhysicalNumber((-1*x),U);
-  }else{
-        return PhysicalNumber(x,U);
-}
+        if(this->x < 0) {
+                return PhysicalNumber((-1*x),U);
+        }else{
+                return PhysicalNumber(x,U);
+        }
 }
 const PhysicalNumber PhysicalNumber::operator-() {
         return PhysicalNumber((-1*x),U);
@@ -95,26 +95,24 @@ bool is_number(const std::string& s)
         while (it != s.end() && (std::isdigit(*it) || *it=='.')) ++it;
         return !s.empty() && it == s.end();
 }
-istream& ariel::operator>>(istream &is, PhysicalNumber& n){
-ios::pos_type startPosition = is.tellg();
-auto errorState = is.rdstate();
 
+
+istream& ariel::operator>>(istream &is, PhysicalNumber& n){
+        ios::pos_type startPosition = is.tellg();
         string num,s,type;
         bool flag=false;
         is>>s;
         num = s.substr(0, s.find("["));
         type=s.substr(s.find("[")+1,s.length() -s.find("[")-2);
         for(size_t i = 0; i < 9; i++) {
-                if(!type.compare(name[i])) {
+                if(name[i] == type) {
                         n.U = (Unit)i;
                         flag=true;
                 }
         }
-        if(flag==false){
-          is.clear(); // clear error so seekg will work
-          is.seekg(startPosition); // rewind
-          is.clear(errorState); // set back the error flag
-          return is;
+        if(flag==false) {
+          n.errorStream(is,startPosition);
+    return is;
         }
         flag=false;
         if(is_number(num)) {
@@ -123,24 +121,20 @@ auto errorState = is.rdstate();
         }
 
         if(s.find("[")==string::npos||s.find("]")==string::npos) {
-          is.clear(); // clear error so seekg will work
-          is.seekg(startPosition); // rewind
-          is.clear(errorState); // set back the error flag
-          return is;
+          n.errorStream(is,startPosition);
+      return is;
         }
         if(flag==false) {
-          is.clear(); // clear error so seekg will work
-          is.seekg(startPosition); // rewind
-          is.clear(errorState); // set back the error flag
-          return is;
+          n.errorStream(is,startPosition);
+return is;
         }
         return is;
 }
-void errorStream(istream &is,ios::pos_type startPosition) {
-  auto errorState = is.rdstate();
-  is.clear(); // clear error so seekg will work
-  is.seekg(startPosition); // rewind
-  is.clear(errorState); // set back the error flag
+void PhysicalNumber::errorStream(istream &is,ios::pos_type startPosition) {
+   auto errorState = is.rdstate();
+   is.clear(); // clear error so seekg will work
+   is.seekg(startPosition); // rewind
+   is.clear(errorState); // set back the error flag
 }
 //bool == < > <= >=
 const bool PhysicalNumber::operator==(const PhysicalNumber& n) const {

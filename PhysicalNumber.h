@@ -12,6 +12,7 @@ double x;
 //void casting()
 public:
 bool someType(const PhysicalNumber& n) const;
+void errorStream(istream &is,ios::pos_type startPosition);
 //constractors
 PhysicalNumber(double x,Unit U);
 // onary

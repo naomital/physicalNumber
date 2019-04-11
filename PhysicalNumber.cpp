@@ -108,6 +108,9 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
                         flag=true;
                 }
         }
+        if(flag==false){
+            __throw_invalid_argument("syntaxt not good");
+        }
         flag=false;
         if(is_number(num)) {
                 flag=true;
@@ -115,12 +118,10 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
         }
 
         if(s.find("[")==string::npos||s.find("]")==string::npos) {
-                flag=false;
-                cout<<s.find("]");
+                __throw_invalid_argument("syntaxt not good");
         }
         if(flag==false) {
                 __throw_invalid_argument("syntaxt not good");
-
         }
         return is;
 }

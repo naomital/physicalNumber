@@ -99,10 +99,10 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
         num = s.substr(0, s.find("["));
         if(is_number(num)) {
                 flag=true;
-                n.x=stod(num);
+                n.x=stoi(num);
         }
 
-       
+
 
         type=s.substr(s.find("[")+1,s.length() -s.find("[")-2);
         for(size_t i = 0; i < 9; i++) {
@@ -114,7 +114,7 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
 
         if(flag==false) {
                __throw_invalid_argument("syntaxt not good");
-               
+
         }
         return is;
 }

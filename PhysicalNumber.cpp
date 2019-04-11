@@ -99,7 +99,7 @@ istream& ariel::operator>>(istream &is, PhysicalNumber& n){
         num = s.substr(0, s.find("["));
         if(is_number(num)) {
                 flag=true;
-                n.x=stoi(num);
+                n.x=stod(num);
         }
 
 

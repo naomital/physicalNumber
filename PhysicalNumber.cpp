@@ -18,6 +18,21 @@ PhysicalNumber::PhysicalNumber( double x1,Unit U1){
         x=x1;
         U=U1;
 }
+// private function that check if a string is a number
+bool is_number(const std::string& s)
+{
+        std::string::const_iterator it = s.begin();
+        while (it != s.end() && (std::isdigit(*it) || *it=='.')) ++it;
+        return !s.empty() && it == s.end();
+}
+//private function that chack if a PhysicalNumber this are in the same caind of type.
+bool PhysicalNumber::someType(const PhysicalNumber& n) const {
+        if(((int)n.U >= 0 && (int)n.U <=2) && ((int)this->U>=0&&(int)this->U<=2)) {return true;}
+        else if (((int)n.U >= 3 && (int)n.U <=5) && ((int)this->U>=3&&(int)this->U<=5)) {return true;}
+        else if (((int)n.U >= 6 && (int)n.U <=8) && ((int)this->U>=6&&(int)this->U<=8)) {return true;}
+        else{return false;}
+}
+
 // + onary
 const PhysicalNumber PhysicalNumber::operator+() {
         if(this->x < 0) {
@@ -208,18 +223,4 @@ void PhysicalNumber::errorStream(istream &is,ios::pos_type startPosition) {
    is.clear(); // clear error so seekg will work
    is.seekg(startPosition); // rewind
    is.clear(errorState); // set back the error flag
-}
-// private function that check if a string is a number
-bool is_number(const std::string& s)
-{
-        std::string::const_iterator it = s.begin();
-        while (it != s.end() && (std::isdigit(*it) || *it=='.')) ++it;
-        return !s.empty() && it == s.end();
-}
-//private function that chack if a PhysicalNumber this are in the same caind of type.
-bool PhysicalNumber::someType(const PhysicalNumber& n) const {
-        if(((int)n.U >= 0 && (int)n.U <=2) && ((int)this->U>=0&&(int)this->U<=2)) {return true;}
-        else if (((int)n.U >= 3 && (int)n.U <=5) && ((int)this->U>=3&&(int)this->U<=5)) {return true;}
-        else if (((int)n.U >= 6 && (int)n.U <=8) && ((int)this->U>=6&&(int)this->U<=8)) {return true;}
-        else{return false;}
 }

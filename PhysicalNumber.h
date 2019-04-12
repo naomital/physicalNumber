@@ -4,15 +4,13 @@ using namespace std;
 namespace ariel {
 class PhysicalNumber {
 private:
-Unit U;
-double x;
+Unit U;// the unit of the tayp
+double x;//the number
+bool someType(const PhysicalNumber& n) const;//private function that chack if they are in the same type.
+void errorStream(istream &is,ios::pos_type startPosition);// special error message.
 
-//convert
-
-//void casting()
 public:
-bool someType(const PhysicalNumber& n) const;
-void errorStream(istream &is,ios::pos_type startPosition);
+
 //constractors
 PhysicalNumber(double x,Unit U);
 // onary
@@ -31,7 +29,7 @@ PhysicalNumber& operator=(const PhysicalNumber& rsize);
 
 const PhysicalNumber operator+(const PhysicalNumber& n) const;
 const PhysicalNumber operator-(const PhysicalNumber& n) const;
-//stream
+//modified friend to allow functions is/os to access data.
 friend ostream& operator<<(ostream &os, const PhysicalNumber& n);
 friend istream& operator>>(istream &is, PhysicalNumber& n);
 // < , > <= , >=
@@ -46,6 +44,7 @@ friend istream& operator>>(istream &is, PhysicalNumber& n);
 
 
 };
+//for everyone to knew that is a function like this:
 ostream& operator<<(ostream &os, const PhysicalNumber& n);
 istream& operator>>(istream &is, PhysicalNumber& n);
 }
